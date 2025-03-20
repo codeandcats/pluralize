@@ -45,7 +45,7 @@ This module uses a pre-defined list of rules, applied in order, to singularize o
 
 * `word: string` The word to pluralize
 * `count: number` How many of the word exist
-* `inclusive: boolean` Whether to prefix with the number (e.g. 3 ducks)
+* `inclusive: boolean | Intl.NumberFormat | (amount: number) => string` Whether to prefix with the number (e.g. 3 ducks)
 
 Examples:
 
@@ -57,6 +57,12 @@ pluralize('test', 5) //=> "tests"
 pluralize('test', 1, true) //=> "1 test"
 pluralize('test', 5, true) //=> "5 tests"
 pluralize('蘋果', 2, true) //=> "2 蘋果"
+
+// Example of formatting numbers
+pluralize('test', 1.57, amount => amount.toFixed(1)) //=> "1.6 tests"
+
+const formatter = new Intl.NumberFormat(undefined, { useGrouping: true, maximumFractionDigits: 1 })
+pluralize('test', 1234567.89, formatter) //=> "1,234,567.9 tests"
 
 // Example of new plural rule:
 pluralize.plural('regex') //=> "regexes"
