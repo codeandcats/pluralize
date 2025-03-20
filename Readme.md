@@ -64,6 +64,18 @@ pluralize('test', 1.57, amount => amount.toFixed(1)) //=> "1.6 tests"
 const formatter = new Intl.NumberFormat(undefined, { useGrouping: true, maximumFractionDigits: 1 })
 pluralize('test', 1234567.89, formatter) //=> "1,234,567.9 tests"
 
+// Example with pronouns
+for (const count of [1, 2]) {
+  console.log([
+    pluralize('This', count),
+    pluralize('pretzel', count),
+    pluralize('is', count),
+    'making me thirsty'
+  ].join(' '))
+}
+//=> This pretzel is making me thirsty
+//=> These pretzels are making me thirsty
+
 // Example of new plural rule:
 pluralize.plural('regex') //=> "regexes"
 pluralize.addPluralRule(/gex$/i, 'gexii')
